@@ -1,0 +1,142 @@
+<div class="row">
+<div class="span12">
+
+	<div class="widget ">
+		<div class="widget-header">
+			<i class="icon-plus"></i>
+ 			<h3>add task</h3>
+		</div> <!-- /widget-header -->
+
+		<div class="widget-content">
+
+		<div class="alert alert-danger hide" role="alert"></div>
+
+		<form id="add-task" action="{{urlfor "TaskController.Add"}}" method="post" class="form-horizontal">
+			<fieldset>
+
+				<div class="control-group">
+					<label class="control-label" for="task_name">task name</label>
+					<div class="controls">
+						<input type="text" name="task_name" class="span6" id="task_name">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="description">description</label>
+					<div class="controls">
+						<textarea name="description" class="span6" id="description" rows="3"></textarea>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+
+				<div class="control-group">
+					<label class="control-label" for="group_id">group</label>
+					<div class="controls">
+						<select name="group_id" id="group_id">
+							<option value="0">unclassified</option>
+							{{range $k, $v := .groups}}
+							<option value="{{$v.Id}}">{{$v.GroupName}}</option>
+							{{end}}
+						</select>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">Whether only one instance is allowed</label>
+					<div class="controls">
+						<label class="radio inline">
+							<input type="radio" value="0" name="concurrent" checked> 是 Yes
+						</label>
+						<label class="radio inline">
+							<input type="radio" value="1" name="concurrent"> 否 No
+						</label>
+						<p class="help-block">Set to "Yes", if the task has not been executed at the previous time, skip execution</p>
+					</div>	<!-- /controls -->
+				</div> <!-- /control-group -->
+
+				<div class="control-group">
+					<label class="control-label" for="cron_spec">cronexpression</label>
+					<div class="controls">
+						<input type="text" name="cron_spec" class="span6" id="cron_spec" value="">
+						<a href="{{urlfor "HelpController.Index"}}" target="_blank">See also using help</a>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+
+
+				<div class="control-group">
+					<label class="control-label" for="command">command</label>
+					<div class="controls">
+						<textarea name="command" class="span6" id="command" rows="6"></textarea>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+
+				<div class="control-group">
+					<label class="control-label" for="timeout">timeout</label>
+					<div class="controls">
+						<input type="text" name="timeout" class="span1" id="timeout" value="0"> 秒
+						<span class="help-block">If not set, the default timeout is 1 day.</span>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+
+				<div class="control-group">
+					<label class="control-label">email notification</label>
+					<div class="controls">
+						<label class="radio inline">
+							<input type="radio" value="0" name="notify" checked> Not notified
+						</label>
+						<label class="radio inline">
+							<input type="radio" value="1" name="notify"> Notification when execution fails
+						</label>
+						<label class="radio inline">
+							<input type="radio" value="2" name="notify"> Notification at the end of execution
+						</label>
+					</div>	<!-- /controls -->
+				</div> <!-- /control-group -->
+
+				<div class="control-group notify_email hide">
+					<label class="control-label" for="notify_email">Notification mail copy</label>
+					<div class="controls">
+						<textarea name="notify_email" class="span6" id="notify_email" rows="6"></textarea>
+						<p class="help-block">One email address per line, please leave blank if you do not need to copy to other people</p>
+					</div> <!-- /controls -->
+				</div> <!-- /control-group -->
+
+				<br />
+
+
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">save</button>
+					<a href="{{urlfor "TaskController.List"}}" class="btn">back</a>
+				</div> <!-- /form-actions -->
+			</fieldset>
+		</form>
+
+		</div>
+	</div>
+</div>
+</div>
+
+<script>
+$(function () {
+	$("form").submit(function () {
+		$(".alert").hide();
+		$("button[type='submit']").attr('disabled', true);
+		$.post('{{urlfor "TaskController.Add"}}', $(this).serialize(), function (out) {
+			if (out.status == 0) {
+				window.location.href = '{{urlfor "TaskController.List"}}';
+			} else {
+				$(".alert").text(out.msg);
+				$(".alert").show();
+				$("button[type='submit']").attr('disabled', false);
+			}
+		}, "json");
+		return false;
+	});
+	$("input[name='notify']").click(function () {
+		if ($(this).val() > 0) {
+			$('.notify_email').removeClass('hide');
+		} else {
+			$('.notify_email').addClass('hide');
+		}
+	});
+});
+</script>

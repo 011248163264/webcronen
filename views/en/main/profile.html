@@ -1,0 +1,67 @@
+<div class="row">
+<div class="span12">
+	<div class="widget ">
+		<div class="widget-header">
+			<i class="icon-user"></i>
+ 			<h3>Modify data</h3>
+		</div> <!-- /widget-header -->
+
+		<div class="widget-content">
+
+			{{if .flash.error}}
+			<div class="alert alert-danger" role="alert">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				{{.flash.error}}
+			</div>
+			{{end}}
+			{{if .flash.success}}
+			<div class="alert alert-success">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				{{.flash.success}}
+           </div>
+			{{end}}
+
+			<form class="form-horizontal" method="post" action="{{urlfor "MainController.Profile"}}">
+				<fieldset>
+
+				<div class="control-group">
+					<label class="control-label" for="username">username</label>
+					<div class="controls">
+						<input type="text" class="span3 disabled" id="username" value="{{.user.UserName}}" disabled="">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="task_name">email</label>
+					<div class="controls">
+						<input type="text" class="span3" id="email" name="email" value="{{.user.Email}}">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="password1">new password</label>
+					<div class="controls">
+						<input type="password" class="span3" id="password1" name="password1" value="" />
+						<p class="help-block">Please leave blank without changing the password.</p>
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="password2">confirm password</label>
+					<div class="controls">
+						<input type="password" class="span3" id="password2" name="password2">
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">save</button>
+					<button type="button" class="btn" onclick="javascript:history.back();">back</button>
+				</div> <!-- /form-actions -->
+
+				</fieldset>
+			</form>
+
+		</div>
+	</div>
+</div>
+</div>
