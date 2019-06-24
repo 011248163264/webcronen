@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	libcron "github.com/lisijie/cron"
+	libcron "github.com/linhux/cron"
 	"github.com/linhux/webcronen/app/jobs"
 	"github.com/linhux/webcronen/app/libs"
 	"github.com/linhux/webcronen/app/models"

@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/astaxie/beego"
-	"github.com/lisijie/webcron/app/mail"
-	"github.com/lisijie/webcron/app/models"
+	"github.com/linhux/webcronen/app/mail"
+	"github.com/linhux/webcronen/app/models"
 	"html/template"
 	"os/exec"
 	"runtime/debug"
@@ -23,7 +23,7 @@ func init() {
 
 <p>
 任务ID：{{.task_id}}<br/>
-任务名称：{{.task_name}}<br/>       
+任务名称：{{.task_name}}<br/>
 执行时间：{{.start_time}}<br />
 执行耗时：{{.process_time}}秒<br />
 执行状态：{{.status}}
