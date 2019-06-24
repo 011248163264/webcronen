@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/lisijie/webcron/app/controllers"
-	"github.com/lisijie/webcron/app/jobs"
-	_ "github.com/lisijie/webcron/app/mail"
-	"github.com/lisijie/webcron/app/models"
+	"github.com/linhux/webcronen/app/controllers"
+	"github.com/linhux/webcronen/app/jobs"
+	_ "github.com/linhux/webcronen/app/mail"
+	"github.com/linhux/webcronen/app/models"
 	"html/template"
 	"net/http"
 )
@@ -37,6 +37,12 @@ func main() {
 	beego.Router("/profile", &controllers.MainController{}, "*:Profile")
 	beego.Router("/gettime", &controllers.MainController{}, "*:GetTime")
 	beego.Router("/help", &controllers.HelpController{}, "*:Index")
+	beego.Router("/en", &controllers.MainController{}, "*:Index")
+	beego.Router("/en/login", &controllers.MainController{}, "*:Login")
+	beego.Router("/en/logout", &controllers.MainController{}, "*:Logout")
+	beego.Router("/en/profile", &controllers.MainController{}, "*:Profile")
+	beego.Router("/en/gettime", &controllers.MainController{}, "*:GetTime")
+	beego.Router("/en/help", &controllers.HelpController{}, "*:Index")
 	beego.AutoRouter(&controllers.TaskController{})
 	beego.AutoRouter(&controllers.GroupController{})
 
