@@ -3,7 +3,7 @@
 	<div class="widget ">
 		<div class="widget-header">
 			<i class="icon-user"></i>
- 			<h3>修改资料</h3>
+ 			<h3>Modify data</h3>
 		</div> <!-- /widget-header -->
 
 		<div class="widget-content">
@@ -25,7 +25,7 @@
 				<fieldset>
 				
 				<div class="control-group">											
-					<label class="control-label" for="username">用户名</label>
+					<label class="control-label" for="username">user</label>
 					<div class="controls">
 						<input type="text" class="span3 disabled" id="username" value="{{.user.UserName}}" disabled="">
 					</div>				
@@ -39,23 +39,23 @@
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label" for="password1">新密码</label>
+					<label class="control-label" for="password1">password</label>
 					<div class="controls">
 						<input type="password" class="span3" id="password1" name="password1" value="" />
-						<p class="help-block">不修改密码请留空</p>
+						<p class="help-block">Please leave blank without changing the password.</p>
 					</div>
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label" for="password2">确认密码</label>
+					<label class="control-label" for="password2">confirm password</label>
 					<div class="controls">
 						<input type="password" class="span3" id="password2" name="password2">
 					</div>
 				</div>
 			
 				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">保存</button>
-					<button type="button" class="btn" onclick="javascript:history.back();">返回</button> 
+					<button type="submit" class="btn btn-primary">save</button>
+					<button type="button" class="btn" onclick="javascript:history.back();">return</button> 
 				</div> <!-- /form-actions -->
 				
 				</fieldset>
