@@ -4,7 +4,7 @@
 	<div class="widget ">
 		<div class="widget-header">
 			<i class="icon-th-list"></i>
- 			<h3>分组列表</h3>
+ 			<h3>分组列表 Group list</h3>
 		</div> <!-- /widget-header -->
 
 		<div class="widget-content">
@@ -14,15 +14,15 @@
 		<div class="btn-toolbar">
 		
 			<div class="btn-group btn-batch">
-				<a class="btn btn-large" href="#"><i class="icon-edit icon-white"></i> 批量操作</a>
+				<a class="btn btn-large" href="#"><i class="icon-edit icon-white"></i> 批量操作 Batch operation</a>
 				<a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				<li><a href="javascript:;" onclick="javascript:batch('delete');"><i class="icon-trash"></i> 删除</a></li>
+				<li><a href="javascript:;" onclick="javascript:batch('delete');"><i class="icon-trash"></i> 删除 delete</a></li>
 				</ul>
 			</div>
 			
 			<div class="btn-group">
-			<a href="{{urlfor "GroupController.Add"}}" class="btn btn-large btn-info"><span class="icon-plus"></span> 新建分组</a>
+			<a href="{{urlfor "GroupController.Add"}}" class="btn btn-large btn-info"><span class="icon-plus"></span> 新建分组 New group</a>
 			</div>
 			
 		</div>
@@ -33,9 +33,9 @@
 			<tr>
 				<th width="20"><input type="checkbox" name="chkall" value="1"></td>
 				<th width="40">ID</th>
-				<th>分组名称</th>
-				<th>描述</th>
-				<th width="100">操作</th>
+				<th>分组名称 Group Name</th>
+				<th>描述 description</th>
+				<th width="100">操作 operating</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -47,7 +47,7 @@
 					<td>{{$v.Description}}</td>
 					<td>
 						<a class="btn btn-info" href="{{urlfor "GroupController.Edit" "id" $v.Id}}">
-							<i class="icon-pencil icon-white"></i> 编辑
+							<i class="icon-pencil icon-white"></i> 编辑 edit
 						</a>
 										
 					</td>
@@ -75,7 +75,7 @@ $(function() {
 function batch(action) {
 	$(".alert").hide();
 	if ($("input[name='ids']:checked").size() < 1) {
-		$(".alert").text("请选择要操作的任务");
+		$(".alert").text("Please select the task you want to operate");
 		$(".alert").show();
 	} else {
 		var url = "{{urlfor "GroupController.Batch"}}";

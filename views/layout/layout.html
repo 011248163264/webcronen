@@ -43,8 +43,8 @@
 						</a>
 						
 						<ul class="dropdown-menu">
-							<li><a href="/profile">修改资料</a></li>
-							<li><a href="/logout">退出登录</a></li>
+							<li><a href="/profile">修改资料 Modify data</a></li>
+							<li><a href="/logout">退出登录 sign out</a></li>
 						</ul>						
 					</li>
 				</ul>				
@@ -60,25 +60,25 @@
 				<li {{if eq .curRoute "main.index"}}class="active"{{end}}>
 					<a href="/">
 						<i class="icon-dashboard"></i>
-						<span>系统概况</span>
+						<span>系统概况 System overview</span>
 					</a>	    				
 				</li>
 				<li {{if eq .curController "task"}}class="active"{{end}}>
 					<a href="/task/list">
 						<i class="icon-list-alt"></i>
-						<span>任务管理</span>
+						<span>任务管理 Task</span>
 					</a>    				
 				</li>
 				<li {{if eq .curController "group"}}class="active"{{end}}>					
 					<a href="/group/list">
 						<i class="icon-folder-close"></i>
-						<span>分组管理</span>
+						<span>分组管理 Group</span>
 					</a>  									
 				</li>
 				<li {{if eq .curController "help"}}class="active"{{end}}>					
 					<a href="/help">
 						<i class="icon-question-sign"></i>
-						<span>使用帮助</span>
+						<span>使用帮助 Help</span>
 					</a>  									
 				</li>
 			</ul>
