@@ -16,11 +16,11 @@ type MainController struct {
 	BaseController
 }
 
-// 首页
+// Home
 func (this *MainController) Index() {
-	this.Data["pageTitle"] = "系统概况"
+	this.Data["pageTitle"] = "System overview"
 
-	// 即将执行的任务
+	// Upcoming task
 	entries := jobs.GetEntries(30)
 	jobList := make([]map[string]interface{}, len(entries))
 	for k, v := range entries {
@@ -32,7 +32,7 @@ func (this *MainController) Index() {
 		jobList[k] = row
 	}
 
-	// 最近执行的日志
+	// Recently executed log
 	logs, _ := models.TaskLogGetList(1, 20)
 	recentLogs := make([]map[string]interface{}, len(logs))
 	for k, v := range logs {
@@ -52,7 +52,7 @@ func (this *MainController) Index() {
 		recentLogs[k] = row
 	}
 
-	// 最近执行失败的日志
+	// Log of recent execution failure
 	logs, _ = models.TaskLogGetList(1, 20, "status__lt", 0)
 	errLogs := make([]map[string]interface{}, len(logs))
 	for k, v := range logs {
@@ -79,7 +79,7 @@ func (this *MainController) Index() {
 	this.display()
 }
 
-// 个人信息
+// Personal information
 func (this *MainController) Profile() {
 	beego.ReadFromRequest(&this.Controller)
 	user, _ := models.UserGetById(this.userId)
@@ -92,11 +92,11 @@ func (this *MainController) Profile() {
 		password2 := this.GetString("password2")
 		if password1 != "" {
 			if len(password1) < 6 {
-				flash.Error("密码长度必须大于6位")
+				flash.Error("Password must be longer than 6 digits")
 				flash.Store(&this.Controller)
 				this.redirect(beego.URLFor(".Profile"))
 			} else if password2 != password1 {
-				flash.Error("两次输入的密码不一致")
+				flash.Error("Inconsistent password entered twice")
 				flash.Store(&this.Controller)
 				this.redirect(beego.URLFor(".Profile"))
 			} else {
@@ -105,12 +105,12 @@ func (this *MainController) Profile() {
 				user.Update()
 			}
 		}
-		flash.Success("修改成功！")
+		flash.Success("Successfully modified！")
 		flash.Store(&this.Controller)
 		this.redirect(beego.URLFor(".Profile"))
 	}
 
-	this.Data["pageTitle"] = "个人信息"
+	this.Data["pageTitle"] = "Personal information"
 	this.Data["user"] = user
 	this.display()
 }
@@ -131,9 +131,9 @@ func (this *MainController) Login() {
 			user, err := models.UserGetByName(username)
 			errorMsg := ""
 			if err != nil || user.Password != libs.Md5([]byte(password+user.Salt)) {
-				errorMsg = "帐号或密码错误"
+				errorMsg = "Account or password incorrect"
 			} else if user.Status == -1 {
-				errorMsg = "该帐号已禁用"
+				errorMsg = "This account is disabled"
 			} else {
 				user.LastIp = this.getClientIp()
 				user.LastLogin = time.Now().Unix()

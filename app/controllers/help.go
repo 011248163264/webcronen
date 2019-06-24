@@ -6,6 +6,6 @@ type HelpController struct {
 
 func (this *HelpController) Index() {
 
-	this.Data["pageTitle"] = "使用帮助"
+	this.Data["pageTitle"] = "Using help"
 	this.display()
 }

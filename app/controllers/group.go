@@ -20,7 +20,7 @@ func (this *GroupController) List() {
 
 	list, count := models.TaskGroupGetList(page, this.pageSize)
 
-	this.Data["pageTitle"] = "分组列表"
+	this.Data["pageTitle"] = "Group list"
 	this.Data["list"] = list
 	this.Data["pageBar"] = libs.NewPager(page, int(count), this.pageSize, beego.URLFor("GroupController.List"), true).ToString()
 	this.display()
@@ -40,7 +40,7 @@ func (this *GroupController) Add() {
 		this.ajaxMsg("", MSG_OK)
 	}
 
-	this.Data["pageTitle"] = "添加分组"
+	this.Data["pageTitle"] = "Add group"
 	this.display()
 }
 
@@ -62,7 +62,7 @@ func (this *GroupController) Edit() {
 		this.ajaxMsg("", MSG_OK)
 	}
 
-	this.Data["pageTitle"] = "编辑分组"
+	this.Data["pageTitle"] = "Edit group"
 	this.Data["group"] = group
 	this.display()
 }
@@ -71,7 +71,7 @@ func (this *GroupController) Batch() {
 	action := this.GetString("action")
 	ids := this.GetStrings("ids")
 	if len(ids) < 1 {
-		this.ajaxMsg("请选择要操作的项目", MSG_ERR)
+		this.ajaxMsg("Please select the item to operate", MSG_ERR)
 	}
 
 	for _, v := range ids {
