@@ -19,7 +19,7 @@ func (t *TaskGroup) TableName() string {
 
 func (t *TaskGroup) Update(fields ...string) error {
 	if t.GroupName == "" {
-		return fmt.Errorf("组名不能为空")
+		return fmt.Errorf("Group name cannot be empty")
 	}
 	if _, err := orm.NewOrm().Update(t, fields...); err != nil {
 		return err
@@ -29,7 +29,7 @@ func (t *TaskGroup) Update(fields ...string) error {
 
 func TaskGroupAdd(obj *TaskGroup) (int64, error) {
 	if obj.GroupName == "" {
-		return 0, fmt.Errorf("组名不能为空")
+		return 0, fmt.Errorf("Group name cannot be empty")
 	}
 	return orm.NewOrm().Insert(obj)
 }

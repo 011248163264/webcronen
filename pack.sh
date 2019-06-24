@@ -2,7 +2,7 @@
 
 tarfile="webcron-$1.tar.gz"
 
-echo "开始打包$tarfile..."
+echo "开始打包 Start packing $tarfile..."
 
 export GOARCH=amd64
 export GOOS=linux

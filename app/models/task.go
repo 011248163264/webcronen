@@ -44,13 +44,13 @@ func (t *Task) Update(fields ...string) error {
 
 func TaskAdd(task *Task) (int64, error) {
 	if task.TaskName == "" {
-		return 0, fmt.Errorf("TaskName字段不能为空")
+		return 0, fmt.Errorf("TaskName Field cannot be empty")
 	}
 	if task.CronSpec == "" {
-		return 0, fmt.Errorf("CronSpec字段不能为空")
+		return 0, fmt.Errorf("CronSpec Field cannot be empty")
 	}
 	if task.Command == "" {
-		return 0, fmt.Errorf("Command字段不能为空")
+		return 0, fmt.Errorf("Command Field cannot be empty")
 	}
 	if task.CreateTime == 0 {
 		task.CreateTime = time.Now().Unix()

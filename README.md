@@ -1,4 +1,4 @@
-# webcron
+# webcronen
 ------------
 
 A timed task manager based on Go and beego framework development. It is used to uniformly manage the scheduled tasks in the project, providing visual configuration interface, performing log recording, email notification and other functions without relying on the crontab service under *unix.
@@ -26,7 +26,7 @@ The system needs to install Go and MySQL.
 
 Get the source code
 
-	$ go get github.com/lisijie/webcron
+	$ go get github.com/linhux/webcronen
 
 Open the configuration file conf/app.conf and modify the related configuration.
 
@@ -37,7 +37,7 @@ Create database webcron, then import install.sql
 
 run
 
-	$ ./webcron
+	$ ./webcronen
 	or
 	$ nohup ./webcron 2>&1 > error.log &
 	Set to run in the background

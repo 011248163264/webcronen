@@ -40,7 +40,7 @@ func NewPager(page, totalnum, pagesize int, url string, nopath ...bool) *Pager {
 }
 
 func (this *Pager) url(page int) string {
-	if this.nopath { //不使用目录形式
+	if this.nopath { //Do not use the directory form
 		if this.urlquery != "" {
 			return fmt.Sprintf("%s%s&page=%d", this.urlpath, this.urlquery, page)
 		} else {

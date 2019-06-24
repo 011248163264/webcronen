@@ -19,21 +19,21 @@ func init() {
 	mailTpl, _ = template.New("mail_tpl").Parse(`
 	你好 {{.username}}，<br/>
 
-<p>以下是任务执行结果：</p>
+<p>The following is the task execution result：</p>
 
 <p>
-任务ID：{{.task_id}}<br/>
-任务名称：{{.task_name}}<br/>
-执行时间：{{.start_time}}<br />
-执行耗时：{{.process_time}}秒<br />
-执行状态：{{.status}}
+Task ID：{{.task_id}}<br/>
+Task name：{{.task_name}}<br/>
+Execution time：{{.start_time}}<br />
+Execution time：{{.process_time}}second<br />
+Execution status：{{.status}}
 </p>
-<p>-------------以下是任务执行输出-------------</p>
+<p>-------------Task output-------------</p>
 <p>{{.output}}</p>
 <p>
 --------------------------------------------<br />
-本邮件由系统自动发出，请勿回复<br />
-如果要取消邮件通知，请登录到系统进行设置<br />
+This message is automatically sent by the system，Please do not reply<br />
+If you want to cancel the email notification，Please log in to the system to set up<br />
 </p>
 `)
 
@@ -51,7 +51,7 @@ type Job struct {
 
 func NewJobFromTask(task *models.Task) (*Job, error) {
 	if task.Id < 1 {
-		return nil, fmt.Errorf("ToJob: 缺少id")
+		return nil, fmt.Errorf("ToJob: Missing id")
 	}
 	job := NewCommandJob(task.Id, task.TaskName, task.Command)
 	job.task = task
@@ -96,7 +96,7 @@ func (j *Job) GetLogId() int64 {
 
 func (j *Job) Run() {
 	if !j.Concurrent && j.status > 0 {
-		beego.Warn(fmt.Sprintf("任务[%d]上一次执行尚未结束，本次被忽略。", j.id))
+		beego.Warn(fmt.Sprintf("task[%d]The last execution has not ended yet，This time is ignored.", j.id))
 		return
 	}
 
@@ -113,7 +113,7 @@ func (j *Job) Run() {
 		}()
 	}
 
-	beego.Debug(fmt.Sprintf("开始执行任务: %d", j.id))
+	beego.Debug(fmt.Sprintf("Start the task: %d", j.id))
 
 	j.status++
 	defer func() {
@@ -130,7 +130,7 @@ func (j *Job) Run() {
 
 	ut := time.Now().Sub(t) / time.Millisecond
 
-	// 插入日志
+	// Insert log
 	log := new(models.TaskLog)
 	log.TaskId = j.id
 	log.Output = cmdOut
@@ -140,19 +140,19 @@ func (j *Job) Run() {
 
 	if isTimeout {
 		log.Status = models.TASK_TIMEOUT
-		log.Error = fmt.Sprintf("任务执行超过 %d 秒\n----------------------\n%s\n", int(timeout/time.Second), cmdErr)
+		log.Error = fmt.Sprintf("Task execution exceeded %d seconds\n----------------------\n%s\n", int(timeout/time.Second), cmdErr)
 	} else if err != nil {
 		log.Status = models.TASK_ERROR
 		log.Error = err.Error() + ":" + cmdErr
 	}
 	j.logId, _ = models.TaskLogAdd(log)
 
-	// 更新上次执行时间
+	// Update last execution time
 	j.task.PrevTime = t.Unix()
 	j.task.ExecuteTimes++
 	j.task.Update("PrevTime", "ExecuteTimes")
 
-	// 发送邮件通知
+	// Send email notification
 	if (j.task.Notify == 1 && err != nil) || j.task.Notify == 2 {
 		user, uerr := models.UserGetById(j.task.UserId)
 		if uerr != nil {
@@ -170,14 +170,14 @@ func (j *Job) Run() {
 		data["output"] = cmdOut
 
 		if isTimeout {
-			title = fmt.Sprintf("任务执行结果通知 #%d: %s", j.task.Id, "超时")
-			data["status"] = fmt.Sprintf("超时（%d秒）", int(timeout/time.Second))
+			title = fmt.Sprintf("Task execution result notification #%d: %s", j.task.Id, "time out")
+			data["status"] = fmt.Sprintf("Timeout (%d seconds)", int(timeout/time.Second))
 		} else if err != nil {
-			title = fmt.Sprintf("任务执行结果通知 #%d: %s", j.task.Id, "失败")
-			data["status"] = "失败（" + err.Error() + "）"
+			title = fmt.Sprintf("Task execution result notification #%d: %s", j.task.Id, "failure")
+			data["status"] = "failure（" + err.Error() + "）"
 		} else {
-			title = fmt.Sprintf("任务执行结果通知 #%d: %s", j.task.Id, "成功")
-			data["status"] = "成功"
+			title = fmt.Sprintf("Task execution result notification #%d: %s", j.task.Id, "success")
+			data["status"] = "success"
 		}
 
 		content := new(bytes.Buffer)
@@ -187,7 +187,7 @@ func (j *Job) Run() {
 			ccList = strings.Split(j.task.NotifyEmail, "\n")
 		}
 		if !mail.SendMail(user.Email, user.UserName, title, content.String(), ccList) {
-			beego.Error("发送邮件超时：", user.Email)
+			beego.Error("Send mail timeout：", user.Email)
 		}
 	}
 }

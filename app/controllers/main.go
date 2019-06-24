@@ -157,13 +157,13 @@ func (this *MainController) Login() {
 	this.TplName = "main/login.html"
 }
 
-// 退出登录
+// sign out
 func (this *MainController) Logout() {
 	this.Ctx.SetCookie("auth", "")
 	this.redirect(beego.URLFor("MainController.Login"))
 }
 
-// 获取系统时间
+// Get system time
 func (this *MainController) GetTime() {
 	out := make(map[string]interface{})
 	out["time"] = time.Now().UnixNano() / int64(time.Millisecond)
