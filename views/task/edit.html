@@ -4,7 +4,7 @@
 	<div class="widget ">
 		<div class="widget-header">
 			<i class="icon-plus"></i>
- 			<h3>编辑任务</h3>
+ 			<h3>Editing task</h3>
 		</div> <!-- /widget-header -->
 
 		<div class="widget-content">
@@ -16,24 +16,24 @@
 			<fieldset>
 				
 				<div class="control-group">											
-					<label class="control-label" for="task_name">任务名称</label>
+					<label class="control-label" for="task_name">name</label>
 					<div class="controls">
 						<input type="text" name="task_name" value="{{.task.TaskName}}" class="span6" id="task_name">
 					</div>				
 				</div>
 				
 				<div class="control-group">											
-					<label class="control-label" for="description">任务说明</label>
+					<label class="control-label" for="description">Task description</label>
 					<div class="controls">
 						<textarea name="description" class="span6" id="description" rows="3">{{.task.Description}}</textarea>
 					</div> <!-- /controls -->				
 				</div> <!-- /control-group -->
 				
 				<div class="control-group">											
-					<label class="control-label" for="group_id">分组</label>
+					<label class="control-label" for="group_id">group</label>
 					<div class="controls">
 						<select name="group_id" id="group_id">
-							<option value="0">未分组</option>
+							<option value="0">unclassified</option>
 							{{range $k, $v := .groups}}
 							<option value="{{$v.Id}}" {{if eq $v.Id $.task.GroupId}}selected{{end}}>{{$v.GroupName}}</option>
 							{{end}}
@@ -42,61 +42,61 @@
 				</div>
 				
 				<div class="control-group">											
-					<label class="control-label">是否只允许一个实例</label>
+					<label class="control-label">Whether only one instance is allowed</label>
 					<div class="controls">
 						<label class="radio inline">
-							<input type="radio" value="0" name="concurrent" {{if eq .task.Concurrent 0}}checked{{end}}> 是
+							<input type="radio" value="0" name="concurrent" {{if eq .task.Concurrent 0}}checked{{end}}> 是 Yes
 						</label>
 						<label class="radio inline">
-							<input type="radio" value="1" name="concurrent" {{if eq .task.Concurrent 1}}checked{{end}}> 否
+							<input type="radio" value="1" name="concurrent" {{if eq .task.Concurrent 1}}checked{{end}}> 否 No
 						</label>
-						<p class="help-block">设为“是”的话，如果该任务在上一个时间点还没执行完，则略过不执行</p>
+						<p class="help-block">Set to "Yes", if the task has not been executed at the previous time, skip execution</p>
 					</div>	<!-- /controls -->			
 				</div> <!-- /control-group -->
 				
 				<div class="control-group">											
-					<label class="control-label" for="cron_spec">cron表达式</label>
+					<label class="control-label" for="cron_spec">Cron expression</label>
 					<div class="controls">
 						<input type="text" name="cron_spec" class="span6" id="cron_spec" value="{{.task.CronSpec}}">
-						<a href="{{urlfor "HelpController.Index"}}" target="_blank">参见使用帮助</a>
+						<a href="{{urlfor "HelpController.Index"}}" target="_blank">See also using help</a>
 					</div> <!-- /controls -->				
 				</div> <!-- /control-group -->
 				
 				<div class="control-group">											
-					<label class="control-label" for="command">命令脚本</label>
+					<label class="control-label" for="command">Command script</label>
 					<div class="controls">
 						<textarea name="command" class="span6" id="command" rows="6">{{.task.Command}}</textarea>
 					</div> <!-- /controls -->				
 				</div> <!-- /control-group -->
 				
 				<div class="control-group">											
-					<label class="control-label" for="timeout">超时设置</label>
+					<label class="control-label" for="timeout">Timeout setting</label>
 					<div class="controls">
 						<input type="text" name="timeout" class="span1" id="timeout" value="{{.task.Timeout}}"> 秒
-						<span class="help-block">不设置的话，默认超时时间为1天</span>
+						<span class="help-block">If not set, the default timeout is 1 day.</span>
 					</div> <!-- /controls -->				
 				</div> <!-- /control-group -->
 				
 				<div class="control-group">											
-					<label class="control-label">邮件通知</label>
+					<label class="control-label">E-mail notification</label>
 					<div class="controls">
 						<label class="radio inline">
-							<input type="radio" value="0" name="notify" {{if eq .task.Notify 0}}checked{{end}}> 不通知
+							<input type="radio" value="0" name="notify" {{if eq .task.Notify 0}}checked{{end}}> Not notified
 						</label>
 						<label class="radio inline">
-							<input type="radio" value="1" name="notify" {{if eq .task.Notify 1}}checked{{end}}> 执行失败时通知
+							<input type="radio" value="1" name="notify" {{if eq .task.Notify 1}}checked{{end}}> Notification when execution fails
 						</label>
 						<label class="radio inline">
-							<input type="radio" value="2" name="notify" {{if eq .task.Notify 2}}checked{{end}}> 执行结束时通知
+							<input type="radio" value="2" name="notify" {{if eq .task.Notify 2}}checked{{end}}> Notification at the end of execution
 						</label>
 					</div>	<!-- /controls -->			
 				</div> <!-- /control-group -->
 				
 				<div class="control-group notify_email {{if eq .task.Notify 0}}hide{{end}}">											
-					<label class="control-label" for="notify_email">通知邮件抄送人</label>
+					<label class="control-label" for="notify_email">Notification mail copy</label>
 					<div class="controls">
 						<textarea name="notify_email" class="span6" id="notify_email" rows="6">{{.task.NotifyEmail}}</textarea>
-						<p class="help-block">每行一个email地址，如果不需要抄送给其他人请留空</p>
+						<p class="help-block">One email address per line, please leave blank if you do not need to copy to other people</p>
 					</div> <!-- /controls -->				
 				</div> <!-- /control-group -->
 		
@@ -104,8 +104,8 @@
 				
 					
 				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">保 存</button> 
-					<a href="{{urlfor "TaskController.List"}}" class="btn">返 回</a>
+					<button type="submit" class="btn btn-primary">Save</button>
+					<a href="{{urlfor "TaskController.List"}}" class="btn">Return</a>
 				</div> <!-- /form-actions -->
 			</fieldset>
 		</form>

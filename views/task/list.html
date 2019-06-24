@@ -4,7 +4,7 @@
 	<div class="widget ">
 		<div class="widget-header">
 			<i class="icon-th-list"></i>
- 			<h3>任务列表</h3>
+ 			<h3>task list</h3>
 		</div> <!-- /widget-header -->
 
 		<div class="widget-content">
@@ -14,24 +14,24 @@
 		<div class="btn-toolbar">
 		
 			<div class="btn-group btn-batch">
-				<a class="btn btn-large" href="#"><i class="icon-edit icon-white"></i> 批量操作</a>
+				<a class="btn btn-large" href="#"><i class="icon-edit icon-white"></i> Batch operation</a>
 				<a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				<li><a href="javascript:;" onclick="javascript:batch('active');"><i class="icon-play"></i> 激活</a></li>
-				<li><a href="javascript:;" onclick="javascript:batch('pause');"><i class="icon-pause"></i> 暂停</a></li>
+				<li><a href="javascript:;" onclick="javascript:batch('active');"><i class="icon-play"></i> activation</a></li>
+				<li><a href="javascript:;" onclick="javascript:batch('pause');"><i class="icon-pause"></i> time out</a></li>
 				<li class="divider"></li>
-				<li><a href="javascript:;" onclick="javascript:batch('delete');"><i class="icon-trash"></i> 删除</a></li>
+				<li><a href="javascript:;" onclick="javascript:batch('delete');"><i class="icon-trash"></i> delete</a></li>
 				</ul>
 			</div>
 			
 			<div class="btn-group">
-			<a href="{{urlfor "TaskController.Add"}}" class="btn btn-large btn-info"><span class="icon-plus"></span> 新建任务</a>
+			<a href="{{urlfor "TaskController.Add"}}" class="btn btn-large btn-info"><span class="icon-plus"></span> New task</a>
 			</div>
 			
 			<div class="btn-group  btn-large" style="float:right">
 			<form method="post" name="s" action="{{urlfor "TaskController.List"}}">
 				<select name="groupid" class="btn-large">
-					<option value="0">全部分组</option>
+					<option value="0">groups</option>
 					{{range $k, $v := .groups}}
 					<option value="{{$v.Id}}" {{if eq $v.Id $.groupid}}selected{{end}}>{{$v.GroupName}}</option>
 					{{end}}
@@ -47,11 +47,11 @@
 			<tr>
 				<th width="20"><input type="checkbox" name="chkall" value="1"></td>
 				<th width="40">ID</th>
-				<th>任务名称</th>
-				<th>时间表达式</th>
-				<th class="span2">上次执行时间</th>
-				<th class="span2">下次执行时间</th>
-				<th class="span5">操作</th>
+				<th>name</th>
+				<th>Time expression</th>
+				<th class="span2">Last execution time</th>
+				<th class="span2">Next execution time</th>
+				<th class="span5">operating</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -75,21 +75,21 @@
 					<td>
 						{{if eq $v.status 0}}
 						<a class="btn btn-danger" href="{{urlfor "TaskController.Start"}}?id={{$v.id}}">
-							<span class="icon-play-circle icon-white"></span> 激活
+							<span class="icon-play-circle icon-white"></span> activation
 						</a>
 						{{else}}
 						<a class="btn btn-success" href="{{urlfor "TaskController.Pause"}}?id={{$v.id}}">
-							<span class="icon-ban-circle icon-white"></span> 暂停
+							<span class="icon-ban-circle icon-white"></span> time out
 						</a>
 						{{end}}
 						<a class="btn btn-info" href="{{urlfor "TaskController.Edit"}}?id={{$v.id}}">
-							<span class="icon-pencil icon-white"></span> 编辑
+							<span class="icon-pencil icon-white"></span> edit
 						</a>
 						<a class="btn btn-info btn-run" href="{{urlfor "TaskController.Run"}}?id={{$v.id}}">
-							<span class="icon-refresh icon-white"></span> 执行
+							<span class="icon-refresh icon-white"></span> carried out
 						</a>
 						<a class="btn btn-info" href="{{urlfor "TaskController.Logs"}}?id={{$v.id}}">
-							<span class="icon-comments"></span> 日志
+							<span class="icon-comments"></span> Log
                        </a>					
 					</td>
 				</tr>

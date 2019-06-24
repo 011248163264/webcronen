@@ -4,7 +4,7 @@
 	<div class="widget ">
 		<div class="widget-header">
 			<i class="icon-th-list"></i>
- 			<h3>任务执行日志</h3>
+ 			<h3>Task execution log</h3>
 		</div> <!-- /widget-header -->
 
 		<div class="widget-content">
@@ -21,15 +21,15 @@
 		<div class="btn-toolbar">
 		
 			<div class="btn-group btn-batch">
-				<a class="btn btn-large" href="#"><i class="icon-edit icon-white"></i> 批量操作</a>
+				<a class="btn btn-large" href="#"><i class="icon-edit icon-white"></i> Batch operation</a>
 				<a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				<li><a href="javascript:;" onclick="javascript:batch('delete');"><i class="icon-trash"></i> 删除</a></li>
+				<li><a href="javascript:;" onclick="javascript:batch('delete');"><i class="icon-trash"></i> delete</a></li>
 				</ul>
 			</div>
 			
 			<div class="btn-group">
-				<a href="{{urlfor "TaskController.List"}}" class="btn btn-large"><span class="icon-chevron-left"></span> 返 回</a>
+				<a href="{{urlfor "TaskController.List"}}" class="btn btn-large"><span class="icon-chevron-left"></span> Return</a>
 			</div>
 			
 		</div>
@@ -40,11 +40,11 @@
 			<tr>
 				<th width="20"><input type="checkbox" name="chkall" value="1"></td>
 				<th width="40">ID</th>
-				<th>开始时间</th>
-				<th>执行时间</th>
-				<th>输出</th>
-				<th class="span2">状态</th>
-				<th>操作</th>
+				<th>Starting time</th>
+				<th>execution time</th>
+				<th>Output</th>
+				<th class="span2">status</th>
+				<th>operating</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -53,20 +53,20 @@
 					<td><input type="checkbox" name="ids" value="{{$v.id}}" /></td>
 					<td class="center">{{$v.id}}</td>
 					<td>{{$v.start_time}}</td>
-					<td>{{$v.process_time}} 秒</td>
+					<td>{{$v.process_time}} second</td>
 					<td>{{$v.ouput_size}}</td>
 					<td>
 					{{if eq $v.status 0}}
-					<span class="icon-ok-sign" style="color:green"> 正常</span>
+					<span class="icon-ok-sign" style="color:green"> normal</span>
 					{{else if eq $v.status -1}}
-					<span class=" icon-remove-sign" style="color:#ff7f74"> 出错</span>
+					<span class=" icon-remove-sign" style="color:#ff7f74"> Error</span>
 					{{else if eq $v.status -2}}
-					<span class=" icon-remove-sign" style="color:#ff7f74"> 超时</span>
+					<span class=" icon-remove-sign" style="color:#ff7f74"> time out</span>
 					{{end}}
 					</td>
 					<td>
 						<a class="btn btn-info" href="{{urlfor "TaskController.ViewLog"}}?id={{$v.id}}">
-							<i class="icon-comment"></i> 详情
+							<i class="icon-comment"></i> Details
                        </a>					
 					</td>
 				</tr>
@@ -93,7 +93,7 @@ $(function() {
 function batch(action) {
 	$(".alert").hide();
 	if ($("input[name='ids']:checked").size() < 1) {
-		$(".alert").text("请选择要操作的任务");
+		$(".alert").text("Please select the task you want to operate");
 		$(".alert").show();
 	} else {
 		var url = "{{urlfor "TaskController.LogBatch"}}";
