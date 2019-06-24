@@ -99,7 +99,7 @@ func (this *BaseController) showMsg(args ...string) {
 	this.StopRun()
 }
 
-// 输出json
+// Output json
 func (this *BaseController) jsonResult(out interface{}) {
 	this.Data["json"] = out
 	this.ServeJSON()
@@ -114,7 +114,7 @@ func (this *BaseController) ajaxMsg(msg interface{}, msgno int) {
 	this.jsonResult(out)
 }
 
-//获取用户IP地址
+//Obtain the user IP address
 func (this *BaseController) getClientIp() string {
 	s := strings.Split(this.Ctx.Request.RemoteAddr, ":")
 	return s[0]
