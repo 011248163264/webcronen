@@ -37,9 +37,11 @@ Create database webcron, then import install.sql
 
 run
 
+      $ cd go/src/github.com/linhux/webcronen
+      $ go build
 	$ ./webcronen
 	or
-	$ nohup ./webcron 2>&1 > error.log &
+	$ nohup ./webcronen 2>&1 > error.log &
 	Set to run in the background
 
 access：
